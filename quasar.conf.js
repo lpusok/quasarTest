@@ -112,6 +112,7 @@ module.exports = function (ctx) {
     },
     cordova: {
       // id: 'org.cordova.quasar.app'
+      androidVersionCode: 16,
     },
     electron: {
       // bundler: 'builder', // or 'packager'
