@@ -3,17 +3,18 @@
 module.exports = function (ctx) {
   return {
     // app plugins (/src/plugins)
-    plugins: [
-    ],
+    // plugins: [
+    //   'axios'
+    // ],
     css: [
       'app.styl'
     ],
     extras: [
       ctx.theme.mat ? 'roboto-font' : null,
-      'material-icons' // optional, you are not bound to it
+      'material-icons',
+      'fontawesome'
       // 'ionicons',
       // 'mdi',
-      // 'fontawesome'
     ],
     supportIE: false,
     build: {
@@ -23,53 +24,98 @@ module.exports = function (ctx) {
       // gzip: true,
       // analyze: true,
       // extractCSS: false,
-      extendWebpack (cfg) {
+      extendWebpack(cfg) {
         cfg.module.rules.push({
           enforce: 'pre',
           test: /\.(js|vue)$/,
           loader: 'eslint-loader',
-          exclude: /node_modules/
-        })
+          exclude: /(node_modules|quasar)/
+        });
       }
     },
     devServer: {
       // https: true,
-      // port: 8080,
-      open: true // opens browser window automatically
+      port: 8181,
+      open: false // opens browser window automatically
     },
     // framework: 'all' --- includes everything; for dev only!
     framework: {
+      config: {
+        cordova: {
+          backButtonExit: false
+        }
+      },
       components: [
         'QLayout',
         'QLayoutHeader',
         'QLayoutDrawer',
         'QPageContainer',
+        'QPageSticky',
         'QPage',
         'QToolbar',
         'QToolbarTitle',
         'QBtn',
         'QIcon',
+        'QField',
         'QList',
         'QListHeader',
         'QItem',
         'QItemMain',
-        'QItemSide'
+        'QItemTile',
+        'QItemSide',
+        'QModal',
+        'QModalLayout',
+        'QAlert',
+        'QInput',
+        'QChip',
+        'QCheckbox',
+        'QTabs',
+        'QTab',
+        'QTabPane',
+        'QRouteTab',
+        'QSpinner',
+        'QSpinnerDots',
+        'QCard',
+        'QCardMedia',
+        'QCardTitle',
+        'QCardMain',
+        'QCardActions',
+        'QCardSeparator',
+        'QCarousel',
+        'QCarouselSlide',
+        'QCarouselControl',
+        'QSelect',
+        'QSearch',
+        'QInfiniteScroll',
+        'QAutocomplete',
+        'QRange',
+        'QPopover',
+        'QDatetime',
+        'QToggle',
+        'QSlider',
+        'QRating',
+        'QRadio',
+        'QSpinnerOval'
       ],
       directives: [
-        'Ripple'
+        'GoBack',
+        'Ripple',
+        'CloseOverlay'
       ],
       // Quasar plugins
       plugins: [
-        'Notify'
+        'Notify',
+        'Dialog',
+        'Loading',
+        'LocalStorage',
+        'SessionStorage'
       ]
       // iconSet: ctx.theme.mat ? 'material-icons' : 'ionicons'
       // i18n: 'de' // Quasar language
     },
     // animations: 'all' --- includes all animations
-    animations: [],
-    ssr: {
-      pwa: false
-    },
+    animations: [
+    ],
     pwa: {
       // workboxPluginMode: 'InjectManifest',
       // workboxOptions: {},
@@ -111,8 +157,8 @@ module.exports = function (ctx) {
       }
     },
     cordova: {
-      // id: 'org.cordova.quasar.app'
-      androidVersionCode: 16,
+      id: 'app.com.spoonacular',
+      androidVersionCode: 19,
     },
     electron: {
       // bundler: 'builder', // or 'packager'

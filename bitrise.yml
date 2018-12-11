@@ -16,19 +16,19 @@ workflows:
             rm -rf src-cordova/platforms
             rm -rf src-cordova/plugins
             true
-    - npm@1.0.1:
-        inputs:
-        - workdir: "$CORDOVA_WORK_DIR"
-        - command: install
-    - npm@1.0.1:
-        inputs:
-        - workdir: "$CORDOVA_WORK_DIR"
-        - command: install -g quasar-cli
-    - yarn@0.0.8: {}
-    - yarn@0.0.8:
-        inputs:
-        - args: global cordova
-        - command: add
+    # - npm@1.0.1:
+    #     inputs:
+    #     - workdir: "$CORDOVA_WORK_DIR"
+    #     - command: install
+    # - npm@1.0.1:
+    #     inputs:
+    #     - workdir: "$CORDOVA_WORK_DIR"
+    #     - command: install -g quasar-cli
+    # - yarn@0.0.8: {}
+    # - yarn@0.0.8:
+    #     inputs:
+    #     - args: global cordova
+    #     - command: add
     - script@1.1.5:
         title: Quasar Build
         inputs:
@@ -42,7 +42,7 @@ workflows:
             echo "Building Cordova Android"
             cd src-cordova
             mkdir www
-            cordova platform add android
+            #cordova platform add android
 
             # building
             echo "Building Quasar"
@@ -53,10 +53,10 @@ workflows:
         - platform: "$CORDOVA_PLATFORM"
         - target: emulator
         - cordova_version: ''
-        - options: ''
+        - options: '-- --minSdkVersion=21'
         - workdir: "$CORDOVA_WORK_DIR"
-        - add_platform: "false"
-        - readd_platform: "false"
+        - add_platform: "true"
+        - readd_platform: "true"
     # - sign-apk@1.2.4:
     #     inputs:
     #     - apk_path: src-cordova/platforms/android/app/build/outputs/apk/release/app-release-unsigned.apk
